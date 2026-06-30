@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rob Mann · Content & Product Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,ital,wght@9..144,0,700;9..144,1,700&family=Inter:wght@300;400;500&family=Instrument+Serif:ital@0&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --olive: #3a4a2e;
+    --olive-mid: #4d6040;
+    --olive-light: #6b7c5e;
+    --ink: #1a1a18;
+    --ink-mid: #4a4a46;
+    --ink-light: #9a9a94;
+    --paper: #ffffff;
+    --paper-off: #f7f7f5;
+    --amber: #FF5C26;
+    --border: rgba(26,26,24,0.1);
+    --display: 'Fraunces', Georgia, serif;
+    --body: 'Inter', system-ui, sans-serif;
+    --label: 'Instrument Serif', Georgia, serif;
+  }
+
+  html, body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-weight: 300;
+    font-size: 19px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  .page { display: none; min-height: 100vh; }
+  .page.active { display: block; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.5rem 4rem;
+    background: var(--olive);
+    border-bottom: none;
+  }
+
+  .nav-logo {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: normal;
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    letter-spacing: 0;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+
+  .nav-links a, .nav-links button {
+    font-family: var(--body);
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    padding: 0;
+  }
+
+  .nav-links a:hover, .nav-links button:hover { color: #ffffff; }
+
+  /* ── HERO ── */
+  .home-hero {
+    background: var(--olive);
+    padding: 11rem 4rem 7rem;
+    min-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .hero-inner { max-width: 1400px; margin: 0 auto; width: 100%; }
+
+  .hero-kicker {
+    font-family: var(--label);
+    font-size: 2.2rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #ffffff;
+    margin-bottom: 1.75rem;
+  }
+
+  .hero-headline {
+    font-family: var(--display);
+    font-size: clamp(4rem, 8vw, 9rem);
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.0;
+    color: #ffffff;
+    margin-bottom: 2.5rem;
+    max-width: 18ch;
+    letter-spacing: -0.01em;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--amber);
+  }
+
+  .hero-footer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+    padding-top: 3rem;
+  }
+
+  .hero-bio {
+    font-size: 1.3rem;
+    line-height: 1.75;
+    color: #ffffff;
+    max-width: 80ch;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--amber);
+    color: #ffffff;
+    font-family: var(--body);
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 1.1rem 2.5rem;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .hero-cta:hover { opacity: 0.88; transform: translateY(-1px); }
+  .hero-cta .arrow { transition: transform 0.2s; }
+  .hero-cta:hover .arrow { transform: translateY(3px); }
+
+  /* ── CREDENTIALS BAR ── */
+  .credentials {
+    background: var(--paper-off);
+    border-bottom: 1px solid var(--border);
+    padding: 0 4rem;
+    max-width: 100%;
+  }
+
+  .credentials-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    gap: 0;
+  }
+
+  .credential-item {
+    padding: 2rem 3rem 2rem 0;
+    margin-right: 3rem;
+    border-right: 1px solid var(--border);
+  }
+
+  .credential-item:last-child { border-right: none; }
+
+  .credential-label {
+    font-family: var(--label);
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+  }
+
+  .credential-value {
+    font-family: var(--display);
+    font-size: 1.6rem;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+
+  /* ── WHAT I DO ── */
+  .expertise-section {
+    padding: 6rem 4rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .expertise-inner { max-width: 1400px; margin: 0 auto; }
+
+  .section-kicker {
+    font-family: var(--label);
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--amber);
+    margin-bottom: 3rem;
+  }
+
+  .expertise-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3rem;
+  }
+
+  @media (max-width: 1080px) { .expertise-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .expertise-grid { grid-template-columns: 1fr; } }
+
+  .expertise-item {}
+
+  .expertise-num {
+    font-family: var(--body);
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--amber);
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .expertise-title {
+    font-family: var(--body);
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+    letter-spacing: 0;
+  }
+
+  .expertise-desc {
+    font-size: 1.1rem;
+    color: var(--ink-mid);
+    line-height: 1.65;
+  }
+
+  /* ── WORK LIST ── */
+  .work-section {
+    padding: 6rem 4rem;
+  }
+
+  .work-inner { max-width: 1400px; margin: 0 auto; }
+
+  .work-list {
+    list-style: none;
+    margin-top: 3rem;
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .work-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .work-item:hover .work-title { color: var(--amber); }
+  .work-item:hover .work-arrow { opacity: 1; transform: translateX(4px); }
+
+  .work-num {
+    font-family: var(--display);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink-light);
+    letter-spacing: 0.02em;
+  }
+
+  .work-title-group {}
+
+  .work-company {
+    font-family: var(--label);
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink-mid);
+    margin-bottom: 0.35rem;
+  }
+
+  .work-title {
+    font-family: var(--display);
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+  }
+
+  .work-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .work-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    color: var(--ink-mid);
+    white-space: nowrap;
+  }
+
+  .work-lock {
+    color: var(--ink-light);
+    line-height: 0;
+    flex-shrink: 0;
+  }
+
+  .work-body {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    margin-top: 0.4rem;
+    max-width: 52ch;
+  }
+
+  .work-arrow {
+    color: var(--amber);
+    font-size: 1.8rem;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    flex-shrink: 0;
+  }
+
+  /* More row — email link */
+  .work-item-more {
+    text-decoration: none;
+    color: inherit;
+    display: grid;
+    grid-template-columns: 3rem 1fr auto;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  .work-item-more:hover .work-title { color: var(--amber); }
+  .work-item-more:hover .work-arrow { opacity: 1; transform: translateX(4px); }
+
+  /* ── PASSWORD ── */
+  .password-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    padding-top: 6rem;
+    background: var(--paper);
+  }
+
+  .password-card { max-width: 420px; width: 100%; text-align: center; }
+  .lock-icon { width: 40px; height: 40px; margin: 0 auto 2rem; color: var(--ink-light); }
+
+  .password-heading {
+    font-family: var(--display);
+    font-size: 2rem;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  .password-sub { font-size: 0.95rem; color: var(--ink-mid); margin-bottom: 2.5rem; }
+  .password-form { display: flex; flex-direction: column; gap: 1rem; }
+
+  .password-input {
+    width: 100%;
+    padding: 0.9rem 1.2rem;
+    font-family: var(--body);
+    font-size: 1rem;
+    font-weight: 300;
+    background: white;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+    text-align: center;
+    letter-spacing: 0.2em;
+  }
+
+  .password-input:focus { border-color: var(--ink); }
+
+  .password-submit {
+    padding: 0.9rem 2rem;
+    background: var(--olive);
+    color: white;
+    font-family: var(--body);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .password-submit:hover { background: var(--amber); }
+  .password-error { font-size: 0.875rem; color: var(--amber); display: none; margin-top: 0.5rem; }
+
+  /* ── CASE STUDY HERO ── */
+  .cs-hero {
+    background: var(--olive);
+    padding: 10rem 4rem 5rem;
+  }
+
+  .cs-hero-inner { max-width: 1400px; margin: 0 auto; }
+
+  .cs-company {
+    font-family: var(--label);
+    font-size: 1.2rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #ffffff;
+    margin-bottom: 1.25rem;
+  }
+
+  .cs-title {
+    font-family: var(--display);
+    font-size: clamp(3rem, 5.5vw, 5.5rem);
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1.05;
+    color: #ffffff;
+    margin-bottom: 3rem;
+    max-width: 22ch;
+    letter-spacing: -0.01em;
+  }
+
+  .cs-summary-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255,255,255,0.15);
+    margin-bottom: 2rem;
+  }
+
+  .cs-summary-label {
+    font-family: var(--label);
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+  }
+
+  .cs-summary-value {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #ffffff;
+  }
+
+  .cs-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+  .cs-tag {
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    padding: 0.4rem 1rem;
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #ffffff;
+  }
+
+  /* ── FULL-BLEED IMAGE ── */
+  .cs-image-full {
+    width: 100%;
+    background: var(--paper-off);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 4rem;
+  }
+
+  .cs-image-full img {
+    display: block;
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+
+  .cs-image-full img:hover { opacity: 0.9; }
+
+  /* ── CASE STUDY BODY ── */
+  .cs-body {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 4rem 7rem;
+  }
+
+  /* Floating sections — no cards, no borders */
+  .cs-section {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 4rem;
+    padding: 5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .cs-section:last-child { border-bottom: none; }
+
+  .cs-section-label {
+    font-family: var(--label);
+    font-size: 1.4rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--amber);
+    padding-top: 0.15rem;
+  }
+
+  .cs-section-content {
+    min-width: 0;
+  }
+
+  .cs-section-content p {
+    font-size: 1.2rem;
+    line-height: 1.85;
+    color: var(--ink-mid);
+    margin-bottom: 1.1rem;
+  }
+
+  .cs-section-content p:last-child { margin-bottom: 0; }
+
+  .cs-section-content ul { list-style: none; margin-bottom: 1.1rem; }
+  .cs-section-content ul:last-child { margin-bottom: 0; }
+
+  .cs-section-content li {
+    font-size: 1.2rem;
+    line-height: 1.85;
+    color: var(--ink-mid);
+    padding-left: 1.4rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .cs-section-content li:last-child { margin-bottom: 0; }
+
+  .cs-section-content li::before {
+    content: '';
+    position: absolute;
+    left: 0.25rem;
+    top: 0.75rem;
+    width: 5px;
+    height: 5px;
+    background: var(--amber);
+    border-radius: 50%;
+  }
+
+  .cs-section-content a {
+    color: var(--amber);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    transition: opacity 0.2s;
+  }
+
+  .cs-section-content a:hover { opacity: 0.7; }
+
+  /* My thinking callout */
+  .cs-thinking {
+    border-left: 2px solid var(--amber);
+    padding: 1rem 1.25rem;
+    margin-top: 1.5rem;
+    background: var(--paper-off);
+  }
+
+  .cs-thinking-label {
+    font-family: var(--label);
+    font-size: 1.1rem;
+    font-weight: 400;
+    font-style: normal;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+  }
+
+  .cs-thinking p {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--ink-mid);
+    margin: 0 !important;
+  }
+
+  .cs-thinking p + p {
+    margin-top: 0.9rem !important;
+  }
+
+  /* Images */
+  .cs-image-inline {
+    margin: 1.5rem 0;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: white;
+    border-radius: 4px;
+  }
+
+  .cs-image-inline:last-child { margin-bottom: 0; }
+
+  .cs-image-inline img {
+    display: block;
+    width: 100%;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+
+  .cs-image-inline img:hover { opacity: 0.9; }
+
+  .cs-image-phones {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 0.75rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+
+  .cs-image-phones::-webkit-scrollbar { height: 4px; }
+  .cs-image-phones::-webkit-scrollbar-track { background: transparent; }
+  .cs-image-phones::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+  .cs-image-phones img {
+    flex: 0 0 160px;
+    width: 160px;
+    height: auto;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    display: block;
+    scroll-snap-align: start;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+
+  .cs-image-phones img:hover { opacity: 0.85; }
+
+  .cs-image-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1.5rem 0;
+  }
+
+  .cs-image-pair-item { display: flex; flex-direction: column; gap: 0.6rem; }
+
+  .cs-image-pair img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+
+  .cs-image-pair img:hover { opacity: 0.9; }
+
+  .cs-image-pair-caption {
+    font-size: 0.82rem;
+    color: var(--ink-light);
+    text-align: center;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) { .cs-image-pair { grid-template-columns: 1fr; } }
+
+  /* Outcomes */
+  .cs-outcomes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .cs-outcomes:last-child { margin-bottom: 0; }
+
+  .outcome-stat {
+    padding: 1.5rem;
+    background: var(--paper-off);
+    border-left: 2px solid var(--amber);
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .outcome-number {
+    font-family: var(--display);
+    font-size: clamp(1.4rem, 6vw, 3.5rem);
+    font-weight: 700;
+    font-style: normal;
+    color: var(--olive);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .outcome-label { font-size: 1.05rem; color: var(--ink-mid); line-height: 1.4; }
+
+  .cs-subhead {
+    font-family: var(--display);
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+    margin-top: 1.75rem;
+  }
+
+  .cs-subhead:first-child { margin-top: 0; }
+
+  .cs-image-2x2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .cs-image-2x2-item img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    cursor: zoom-in;
+    transition: opacity 0.2s;
+  }
+
+  .cs-image-2x2-item img:hover { opacity: 0.9; }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(20,20,18,0.95);
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    cursor: zoom-out;
+  }
+
+  .lightbox.open { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    cursor: default;
+  }
+
+  .lightbox-close {
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    line-height: 1;
+    padding: 0.5rem;
+  }
+
+  .lightbox-close:hover { opacity: 1; }
+
+  .lightbox-prev, .lightbox-next {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+    padding: 1rem;
+    line-height: 1;
+    display: none;
+  }
+
+  .lightbox-prev { left: 1rem; }
+  .lightbox-next { right: 1rem; }
+  .lightbox-prev:hover, .lightbox-next:hover { opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2.5rem 4rem;
+    background: var(--olive);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .footer-name {
+    font-family: var(--display);
+    font-size: 1.3rem;
+    font-weight: 700;
+    font-style: normal;
+    color: #ffffff;
+    letter-spacing: 0;
+  }
+
+  .footer-links { display: flex; gap: 1.5rem; }
+
+  .footer-links a {
+    font-size: 0.95rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: #ffffff; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    .cs-section { grid-template-columns: 1fr; gap: 1rem; }
+    .cs-section-label { padding-top: 0; }
+    .hero-footer { flex-direction: column; align-items: flex-start; }
+    .cs-summary-strip { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+
+  @media (max-width: 768px) {
+    .cs-outcomes { grid-template-columns: 1fr; }
+    .outcome-number { font-size: 2.5rem; }
+    html, body { overflow-x: hidden; width: 100%; }
+    nav { padding: 1rem 1.25rem; }
+    nav .nav-links { gap: 1.25rem; }
+    .home-hero { padding: 8rem 1.25rem 3rem; min-height: auto; }
+    .hero-headline { font-size: clamp(2.6rem, 11vw, 4rem); max-width: 100%; }
+    .credentials { padding: 0 1.25rem; }
+    .credentials-inner { flex-direction: column; }
+    .credential-item { border-right: none; border-bottom: 1px solid var(--border); margin-right: 0; padding: 1.5rem 0; }
+    .expertise-section { padding: 3rem 1.25rem; }
+    .work-section { padding: 3rem 1.25rem; }
+    .work-item, .work-item-more { grid-template-columns: 1fr; gap: 0.5rem; }
+    .work-num { display: none; }
+    .work-right { display: none; }
+    .cs-hero { padding: 7rem 1.25rem 2.5rem; }
+    .cs-title { max-width: 100%; }
+    .cs-body { padding: 0 1.25rem 4rem; }
+    .cs-section { padding: 3rem 0; }
+    .cs-image-full { padding: 1.5rem 1.25rem; }
+    footer { padding: 2rem 1.25rem; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <button class="nav-logo" onclick="showPage('home')">Rob Mann</button>
+  <ul class="nav-links">
+    <li><button onclick="scrollToWork()">Work</button></li>
+    <li><a href="mailto:rlw.mann@gmail.com">Email</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div class="page active" id="page-home">
+  <main>
+
+    <section class="home-hero">
+      <div class="hero-inner">
+        <p class="hero-kicker">Content & product designer</p>
+        <h1 class="hero-headline">I make complicated things <em>make sense.</em></h1>
+        <div class="hero-footer">
+          <p class="hero-bio">I love building things, and I love solving puzzles.</p>
+          <p class="hero-bio">I've been doing both for over a decade, designing products and the language inside them at places like Meta, Manulife, and Unsplash.</p>
+          <p class="hero-bio">But cracking a problem is only half of it. The other half is building something that works at scale, meets people where they're at, and serves real business needs. And <em>that</em> is what keeps me hooked.</p>
+          <button class="hero-cta" onclick="scrollToWork()">View my work <span class="arrow">↓</span></button>
+        </div>
+      </div>
+    </section>
+
+    <div class="credentials">
+      <div class="credentials-inner">
+        <div class="credential-item">
+          <div class="credential-label">Previously</div>
+          <div class="credential-value">Meta · Manulife · Unsplash · Questrade</div>
+        </div>
+        <div class="credential-item">
+          <div class="credential-label">Based in</div>
+          <div class="credential-value">Toronto, Canada</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="expertise-section">
+      <div class="expertise-inner">
+        <p class="section-kicker">What I do</p>
+        <div class="expertise-grid">
+          <div class="expertise-item">
+            <span class="expertise-num">01</span>
+            <div class="expertise-title">Content design</div>
+            <div class="expertise-desc">UX writing, information architecture, and content systems to define how products sound at scale.</div>
+          </div>
+          <div class="expertise-item">
+            <span class="expertise-num">02</span>
+            <div class="expertise-title">Product design</div>
+            <div class="expertise-desc">Prototypes, interaction patterns, and end-to-end flows. The screens, not just the words on them.</div>
+          </div>
+          <div class="expertise-item">
+            <span class="expertise-num">03</span>
+            <div class="expertise-title">AI-native design</div>
+            <div class="expertise-desc">Creating experiences, systems, and products that feel human, with AI tools like Claude, Cursor, and Figma Make.</div>
+          </div>
+          <div class="expertise-item">
+            <span class="expertise-num">04</span>
+            <div class="expertise-title">Cross-functional leadership</div>
+            <div class="expertise-desc">Embedded in product teams, partnering with legal and compliance to lead through regulatory reviews.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-section" id="work">
+      <div class="work-inner">
+        <p class="section-kicker">Selected work</p>
+        <ul class="work-list">
+
+          <li class="work-item" onclick="requirePassword('forum')">
+            <span class="work-num">01</span>
+            <div class="work-title-group">
+              <div class="work-company">Meta · Forum</div>
+              <div class="work-title">Vibe-coding a new app for Facebook groups</div>
+              <div class="work-body">From 0-1 in 4 months, and earning major positive press coverage.</div>
+            </div>
+            <div class="work-right">
+              <div class="work-tags">
+                <span class="tag">AI-native design</span>
+                <span class="tag">Content design</span>
+                <span class="tag">Information architecture</span>
+              </div>
+              <div class="work-lock" data-lock>
+                <svg class="lock-closed" width="14" height="16" viewBox="0 0 11 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="5.5" width="9" height="7" rx="1.5"/>
+                  <path d="M3 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/>
+                </svg>
+                <svg class="lock-open" width="14" height="16" viewBox="0 0 11 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                  <rect x="1" y="5.5" width="9" height="7" rx="1.5"/>
+                  <path d="M3 5.5V3.5a2.5 2.5 0 0 1 2.5-2.5"/>
+                </svg>
+              </div>
+              <span class="work-arrow">→</span>
+            </div>
+          </li>
+
+          <li class="work-item" onclick="requirePassword('privacy')">
+            <span class="work-num">02</span>
+            <div class="work-title-group">
+              <div class="work-company">Meta · Facebook Groups</div>
+              <div class="work-title">Letting groups safely change privacy settings</div>
+              <div class="work-body">Helping 270K+ private groups go public, while protecting their members' safety.</div>
+            </div>
+            <div class="work-right">
+              <div class="work-tags">
+                <span class="tag">Content design</span>
+                <span class="tag">Legal & regulation</span>
+                <span class="tag">Privacy</span>
+              </div>
+              <div class="work-lock" data-lock>
+                <svg class="lock-closed" width="14" height="16" viewBox="0 0 11 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="5.5" width="9" height="7" rx="1.5"/>
+                  <path d="M3 5.5V3.5a2.5 2.5 0 0 1 5 0v2"/>
+                </svg>
+                <svg class="lock-open" width="14" height="16" viewBox="0 0 11 13" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none;">
+                  <rect x="1" y="5.5" width="9" height="7" rx="1.5"/>
+                  <path d="M3 5.5V3.5a2.5 2.5 0 0 1 2.5-2.5"/>
+                </svg>
+              </div>
+              <span class="work-arrow">→</span>
+            </div>
+          </li>
+
+          <li class="work-item" onclick="showCase('inbox')">
+            <span class="work-num">03</span>
+            <div class="work-title-group">
+              <div class="work-company">Manulife Bank</div>
+              <div class="work-title">Building self-service tools to reduce inbound calls</div>
+              <div class="work-body">Cut call centre volume by 13% by teaching customers how to complete actions on their own.</div>
+            </div>
+            <div class="work-right">
+              <div class="work-tags">
+                <span class="tag">Content design</span>
+                <span class="tag">Service design</span>
+                <span class="tag">Voice & tone</span>
+              </div>
+              <span class="work-arrow">→</span>
+            </div>
+          </li>
+
+          <li class="work-item" onclick="showCase('questrade')">
+            <span class="work-num">04</span>
+            <div class="work-title-group">
+              <div class="work-company">Questrade</div>
+              <div class="work-title">Empowering investors with a new robo-advisor</div>
+              <div class="work-body">Launching Canada's first robo-advisor, and beating our new accounts goal by 60%.</div>
+            </div>
+            <div class="work-right">
+              <div class="work-tags">
+                <span class="tag">Content design</span>
+                <span class="tag">Legal & regulation</span>
+                <span class="tag">Voice & tone</span>
+              </div>
+              <span class="work-arrow">→</span>
+            </div>
+          </li>
+
+          <a class="work-item-more" href="mailto:rlw.mann@gmail.com">
+            <span class="work-num" style="color: var(--amber); line-height: 0;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg></span>
+            <div class="work-title-group">
+              <div class="work-company">Want to see more?</div>
+              <div class="work-title">Reach out for additional case studies</div>
+              <div class="work-body">Some projects are pre-launch or limited release so I can't post them here, but happy to share directly.</div>
+            </div>
+            <div class="work-right">
+              <div class="work-tags">
+                <span class="tag">Drop me a line</span>
+              </div>
+              <span class="work-arrow">→</span>
+            </div>
+          </a>
+
+        </ul>
+      </div>
+    </section>
+
+  </main>
+  <footer>
+    <span class="footer-name">Rob Mann</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/iamrobmann/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ PASSWORD ══ -->
+<div class="page" id="page-password">
+  <div class="password-page">
+    <div class="password-card">
+      <svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+      <h1 class="password-heading">Work samples</h1>
+      <p class="password-sub">Some of this work isn't public yet. If you don't have the password, <a href="mailto:rlw.mann@gmail.com" style="color: var(--amber);">email me</a> and I'll share it.</p>
+      <div class="password-form">
+        <input class="password-input" type="password" id="password-input" placeholder="Password" onkeydown="if(event.key==='Enter')checkPassword()">
+        <button class="password-submit" onclick="checkPassword()">Enter</button>
+        <p class="password-error" id="password-error">Incorrect password. Please try again.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CASE STUDY: FORUM ══ -->
+<div class="page" id="page-case-forum">
+  <div class="cs-hero">
+    <div class="cs-hero-inner">
+      <p class="cs-company">Meta · Forum</p>
+      <h1 class="cs-title">Vibe-coding a new app for Facebook groups</h1>
+      <div class="cs-summary-strip">
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Role</div>
+          <div class="cs-summary-value">Lead Content Designer</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Collaborators</div>
+          <div class="cs-summary-value">Data Science, Engineering, Legal, Product Design, UX Research</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Key outcome</div>
+          <div class="cs-summary-value">Shipped in 4 months, received major positive press coverage</div>
+        </div>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">AI-native design</span>
+        <span class="cs-tag">Content design</span>
+        <span class="cs-tag">Information architecture</span>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+
+    <div class="cs-section">
+      <div class="cs-section-label">Overview</div>
+      <div class="cs-section-content">
+        <p>Facebook's main app is cluttered and unfocused. For group admins and power users, the tools they rely on most for their groups are buried in an app built to do everything for everyone.</p>
+        <p>This led to Forum, a standalone app dedicated to Facebook Groups. In just 4 months, I was part of the team that built it from scratch and shipped it publicly. I was the lead content designer for the admin experience, responsible for the admin AI product and the admin section architecture.</p>
+        <p>I had to honour the mental models from established Facebook patterns, while modernising the experience and designing an AI-powered assistant with no established precedent to follow.</p>
+        <div class="cs-image-inline"><img src="images/forum-app-screenshots.png" alt="Forum app screenshots" /></div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Process</div>
+      <div class="cs-section-content">
+        <p>I audited the existing Facebook admin experience, then worked with PM, PD, UXR, and DS to decide what to carry over to Forum and what to leave behind.</p>
+        <p>For Admin AI, I owned:</p>
+        <ul>
+          <li>The full prompt system, simplifying 100+ admin/moderation actions. I prioritised the prompts using live usage data and refined through testing.</li>
+          <li>AI response rules and guidelines, ranking logic, and personalisation based on group status and admin behaviour.</li>
+          <li>A follow-up question system to help admins keep moving instead of hitting a dead end after their initial question.</li>
+        </ul>
+        <p>Our team worked AI-natively throughout, using Claude, Figma Make, VS Code, and Cursor to design, prototype, and ship. Human-led process, moving faster with AI tools.</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Naming the AI feature</div>
+      <div class="cs-section-content">
+        <p>I tested three directions with ~150 of Facebook's most active admins: "admin AI," "admin AI assistant," and "admin agent."</p>
+        <div class="cs-image-inline"><img src="images/forum-admin-ai-naming.png" alt="Admin AI naming decision table" /></div>
+        <ul>
+          <li><strong style="font-weight:500; color: var(--ink);">Admin AI assistant</strong> caused confusion alongside the existing Admin Assist tool.</li>
+          <li><strong style="font-weight:500; color: var(--ink);">Admin agent</strong> tested poorly. "Agent" isn't an everyday term for most users, and the tool isn't truly agentic, making the label both unclear and inaccurate.</li>
+          <li><strong style="font-weight:500; color: var(--ink);">Admin AI</strong> won.</li>
+        </ul>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>Generic and lowercase on purpose. It sets honest expectations today and preserves the flexibility to merge Admin AI and Admin Assist under a unified name later, without requiring a re-education moment for admins.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Pill prompt system</div>
+      <div class="cs-section-content">
+        <div class="cs-image-phones">
+          <img src="images/forum-admin-ai-recording.gif" alt="Forum admin AI recording" />
+          <img src="images/forum-admin-ai-screenshot-1.png" alt="Forum admin AI screenshot 1" />
+          <img src="images/forum-admin-ai-screenshot-2.png" alt="Forum admin AI screenshot 2" />
+          <img src="images/forum-admin-ai-screenshot-3.png" alt="Forum admin AI screenshot 3" />
+        </div>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>Instead of an open chat interface, I built a contextual system of 100+ pill prompts personalised by group type, maturity, privacy model, admin structure, and pending actions. I also set a grammatical rule: verb-first pills ("Draft welcome post") signal the AI is acting; noun-first pills ("Growth trends") signal it's surfacing information. One rule, scannable at a glance.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Outcomes</div>
+      <div class="cs-section-content">
+        <p>The app launched in May 2026, receiving coverage from <a href="https://techcrunch.com/2026/05/22/meta-quietly-launches-a-new-reddit-like-app-called-forum/" target="_blank">TechCrunch</a>, <a href="https://thenextweb.com/news/meta-forum-facebook-groups-app" target="_blank">The Next Web</a>, <a href="https://www.theverge.com/tech/936290/meta-forum-facebook-groups-app-hands-on" target="_blank">The Verge</a>, <a href="https://www.cnet.com/tech/services-and-software/new-meta-app-forum-brings-your-facebook-groups-together-one-feed/" target="_blank">CNET</a>, and many others.</p>
+        <div class="cs-image-2x2">
+          <div class="cs-image-2x2-item">
+            <img src="images/forum-theverge.png" alt="The Verge coverage of Forum" />
+          </div>
+          <div class="cs-image-2x2-item">
+            <img src="images/forum-cnet.png" alt="CNET coverage of Forum" />
+          </div>
+          <div class="cs-image-2x2-item">
+            <img src="images/forum-nextweb.png" alt="The Next Web coverage of Forum" />
+          </div>
+          <div class="cs-image-2x2-item">
+            <img src="images/forum-TechCrunch.png" alt="TechCrunch coverage of Forum" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <span class="footer-name">Rob Mann</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/iamrobmann/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ CASE STUDY: INBOX ══ -->
+<div class="page" id="page-case-inbox">
+  <div class="cs-hero">
+    <div class="cs-hero-inner">
+      <p class="cs-company">Manulife Bank</p>
+      <h1 class="cs-title">Building self-service tools to reduce inbound calls</h1>
+      <div class="cs-summary-strip">
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Role</div>
+          <div class="cs-summary-value">Content Designer</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Collaborators</div>
+          <div class="cs-summary-value">Compliance, Engineering, Product Design</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Key result</div>
+          <div class="cs-summary-value">Reduced call centre volume by 13%</div>
+        </div>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Content design</span>
+        <span class="cs-tag">Service design</span>
+        <span class="cs-tag">Voice & tone</span>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+
+    <div class="cs-section">
+      <div class="cs-section-label">Overview</div>
+      <div class="cs-section-content">
+        <p>Manulife Bank's call centre was routinely overwhelmed, and customers were frustrated waiting on hold just as often. The kicker: a large portion of incoming calls were for questions, problems, and transactions customers could have resolved themselves in online banking or the mobile app.</p>
+        <p>The challenge was that the customers most likely to call in were the least likely to be mobile-savvy. Introducing a new in-app channel meant we couldn't just build it. We had to bring those customers along with us.</p>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Process</div>
+      <div class="cs-section-content">
+        <p class="cs-subhead">Intercept with self-serve options</p>
+        <div class="cs-image-inline"><img src="images/manulife-new-inbox.png" alt="Manulife new inbox" /></div>
+        <div class="cs-image-inline"><img src="images/manulife-question-list.png" alt="Manulife question list" /></div>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>I developed and ranked the items on the Subject dropdown based on the most common inbound call reasons, most of which already linked directly to self-serve actions available in the app.</p>
+          <p>When a customer selects a subject like "I need a certified/official cheque," we surface a "Good news!" prompt, letting them complete the transaction immediately on their own.</p>
+          <p>In addition to deflecting the call, we're teaching customers what they could do independently.</p>
+        </div>
+        <p class="cs-subhead">Harder cases: account closures</p>
+        <div class="cs-image-inline"><img src="images/manulife-closing-flow.png" alt="Manulife closing flow" /></div>
+        <div class="cs-image-inline"><img src="images/manulife-sent-flow.png" alt="Manulife sent flow" /></div>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>For account closures, we removed friction from the early steps rather than adding it. We surfaced a checklist of things to cancel before closing (pre-authorised payments, cheques, direct deposits) to protect customers from NSF charges, and to warm them up for a retention conversation once the rep was involved.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Outcomes</div>
+      <div class="cs-section-content">
+        <div class="cs-outcomes">
+          <div class="outcome-stat">
+            <span class="outcome-number">13%</span>
+            <span class="outcome-label">Decrease in call centre requests for self-serve transactions</span>
+          </div>
+        </div>
+        <p>Reducing call centre requests by 13% was a big win, but the bigger win was changing behaviour, teaching and empowering customers to complete actions on their own, rather than defaulting to calling in for help.</p>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <span class="footer-name">Rob Mann</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/iamrobmann/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ CASE STUDY: QUESTRADE ══ -->
+<div class="page" id="page-case-questrade">
+  <div class="cs-hero">
+    <div class="cs-hero-inner">
+      <p class="cs-company">Questrade</p>
+      <h1 class="cs-title">Creating Canada's first robo-advisor</h1>
+      <div class="cs-summary-strip">
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Role</div>
+          <div class="cs-summary-value">Content Designer</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Collaborators</div>
+          <div class="cs-summary-value">Compliance, Data Science, Portfolio Management, Product Design</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Key outcome</div>
+          <div class="cs-summary-value">Beat new accounts goal by 60%</div>
+        </div>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Content design</span>
+        <span class="cs-tag">Legal & regulation</span>
+        <span class="cs-tag">Voice & tone</span>
+      </div>
+    </div>
+  </div>
+  <div class="cs-body">
+
+    <div class="cs-section">
+      <div class="cs-section-label">Overview</div>
+      <div class="cs-section-content">
+        <p>Questrade is Canada's leader in self-directed trading, but many Canadians don't want to invest on their own. Robo-advisors were growing in other countries, letting people automate their investing without paying high bank fees, but there weren't any in Canada at the time.</p>
+        <p>We were tasked with building the onboarding system for robo-advisor clients: simple, educational, and designed for people who find the investing world overwhelming.</p>
+        <div class="cs-image-inline"><img src="images/questrade-goals.png" alt="Questrade investment goals" /></div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Tone and language</div>
+      <div class="cs-section-content">
+        <div class="cs-image-inline"><img src="images/questrade-knowledge.png" alt="Questrade investment knowledge" /></div>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>Despite working at a stock brokerage, I wasn't an investor. That put me in a great position to write for novice users. I made the tone deliberately conversational, phrasing things casually to build a relationship with users, while including proper definitions to maintain credibility.</p>
+          <p>Writing knowledge options like <em>"Investments? Financial markets? My head is spinning"</em> instead of <em>"I'm a novice"</em> wasn't just tone: it was a signal that this product was built for them.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Conflicting answers</div>
+      <div class="cs-section-content">
+        <div class="cs-image-inline"><img src="images/questrade-conflicting.png" alt="Questrade conflicting answers" /></div>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>We dug into users' financial goals and risk tendencies, and flagged any conflicts when their answers didn't line up, to make sure we matched them with the portfolio best-suited to their needs.</p>
+          <p>Regulators were actively developing guidance on robo-advisors during the build, requiring content revisions on the fly. I worked closely with compliance throughout to adapt as the rules moved, without degrading the user experience.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Outcomes</div>
+      <div class="cs-section-content">
+        <div class="cs-outcomes">
+          <div class="outcome-stat">
+            <span class="outcome-number">60%</span>
+            <span class="outcome-label">Above new accounts target in year one</span>
+          </div>
+          <div class="outcome-stat">
+            <span class="outcome-number">10%</span>
+            <span class="outcome-label">Above total asset goal in year one</span>
+          </div>
+          <div class="outcome-stat">
+            <span class="outcome-number">#1</span>
+            <span class="outcome-label">Consistently ranked among Canada's top robo-advisors</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <span class="footer-name">Rob Mann</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/iamrobmann/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+<!-- ══ CASE STUDY: PRIVACY ══ -->
+<div class="page" id="page-case-privacy">
+  <div class="cs-hero">
+    <div class="cs-hero-inner">
+      <p class="cs-company">Meta · Facebook Groups</p>
+      <h1 class="cs-title">Letting groups safely change privacy settings</h1>
+      <div class="cs-summary-strip">
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Role</div>
+          <div class="cs-summary-value">Lead Content Designer</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Collaborators</div>
+          <div class="cs-summary-value">Engineering, Legal, Product Design, UX Research</div>
+        </div>
+        <div class="cs-summary-item">
+          <div class="cs-summary-label">Key outcome</div>
+          <div class="cs-summary-value">270K+ private groups converted to public</div>
+        </div>
+      </div>
+      <div class="cs-tags">
+        <span class="cs-tag">Content design</span>
+        <span class="cs-tag">Legal & regulation</span>
+        <span class="cs-tag">Privacy</span>
+      </div>
+    </div>
+  </div>
+  <div class="cs-image-full"><img src="images/p2p-header-newsroom.webp" alt="Facebook Groups privacy update" /></div>
+  <div class="cs-body">
+
+    <div class="cs-section">
+      <div class="cs-section-label">Overview</div>
+      <div class="cs-section-content">
+        <p>In 2019, the FTC and Meta agreed on a privacy consent order, blocking the ability to let private groups become public. This limited a group's ability to grow, strained admin resources, and prevented helpful content from being discovered through organic search.</p>
+        <p>The reverse was also a problem: public groups going private were quietly draining Facebook's organic search ecosystem of discoverable content.</p>
+        <div class="cs-image-inline"><img src="images/p2p-timeline.png" alt="Privacy conversion timeline" /></div>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>The key was a structural asymmetry: new content goes public, but historical content stays private. My job was to make that genuinely complex state legible to everyday admins and members, in a way that satisfied the FTC order.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">The admin and member experience</div>
+      <div class="cs-section-content">
+        <div class="cs-image-pair">
+          <div class="cs-image-pair-item">
+            <img src="images/p2p-admin-flow.gif" alt="Admin conversion flow" />
+            <p class="cs-image-pair-caption">The group admin's experience</p>
+          </div>
+          <div class="cs-image-pair-item">
+            <img src="images/p2p-member-flow.gif" alt="Member notification flow" />
+            <p class="cs-image-pair-caption">The group member's experience</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Three interlocking pieces</div>
+      <div class="cs-section-content">
+        <ul>
+          <li><strong style="font-weight:500; color: var(--ink);">Transparent conversion guardrails:</strong> Explicit education and UI telling admins what will change and what won't.</li>
+          <li><strong style="font-weight:500; color: var(--ink);">A 3-day review window:</strong> When an admin initiates a conversion, co-admins are alerted and have 3 days to cancel. After the conversion, members are notified so they can decide whether to stay or leave.</li>
+          <li><strong style="font-weight:500; color: var(--ink);">Defensive action to keep groups public:</strong> Ask admins what problem they're trying to solve, and pair them with existing tools to address it.</li>
+        </ul>
+        <div class="cs-thinking">
+          <div class="cs-thinking-label">My thinking</div>
+          <p>Getting this done meant holding three competing interests in tension at once: what users needed, what regulators required, and what the business wanted. My experience navigating legal and compliance review meant I could push hard on all three without losing any of them.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="cs-section">
+      <div class="cs-section-label">Outcomes</div>
+      <div class="cs-section-content">
+        <div class="cs-outcomes">
+          <div class="outcome-stat">
+            <span class="outcome-number">270K+</span>
+            <span class="outcome-label">Groups converted to public</span>
+          </div>
+          <div class="outcome-stat">
+            <span class="outcome-number">1,200+</span>
+            <span class="outcome-label">Large public groups retained via admin tool education</span>
+          </div>
+          <div class="outcome-stat">
+            <span class="outcome-number">24</span>
+            <span class="outcome-label">Tier-1 media outlets covered the launch</span>
+          </div>
+        </div>
+        <p>Coverage from <a href="https://techcrunch.com/2025/11/03/facebook-groups-can-now-go-public-without-exposing-members-private-posts/" target="_blank">TechCrunch</a>, <a href="https://lifehacker.com/tech/private-facebook-groups-might-go-public?test_uuid=zXnWOLjQQwkYjMVwrvo5w&test_variant=A" target="_blank">Lifehacker</a>, and others specifically noted that Meta had found a way to give admins growth tools without exposing members' historical private posts, a distinction that came entirely from the content architecture.</p>
+        <div class="cs-image-2x2">
+          <div class="cs-image-2x2-item">
+            <img src="images/p2p-techcrunch.png" alt="TechCrunch coverage of Groups privacy update" />
+          </div>
+          <div class="cs-image-2x2-item">
+            <img src="images/p2p-lifehacker.png" alt="Lifehacker coverage of Groups privacy update" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <footer>
+    <span class="footer-name">Rob Mann</span>
+    <div class="footer-links">
+      <a href="https://www.linkedin.com/in/iamrobmann/" target="_blank">LinkedIn</a>
+    </div>
+  </footer>
+</div>
+
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-prev" id="lightbox-prev" onclick="lightboxNav(-1)">‹</button>
+  <img id="lightbox-img" src="" alt="" />
+  <button class="lightbox-next" id="lightbox-next" onclick="lightboxNav(1)">›</button>
+</div>
+
+<script>
+  const PASSWORD = 'sesame';
+  let authenticated = false;
+  let pendingCase = null;
+
+  function showPage(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById('page-' + id).classList.add('active');
+    window.scrollTo(0, 0);
+    if (id === 'password') {
+      setTimeout(() => document.getElementById('password-input').focus(), 50);
+    }
+  }
+
+  function scrollToWork() {
+    showPage('home');
+    setTimeout(() => {
+      document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
+    }, 50);
+  }
+
+  function showCase(id) { showPage('case-' + id); }
+
+  function requirePassword(id) {
+    if (authenticated) {
+      showCase(id);
+    } else {
+      pendingCase = id;
+      showPage('password');
+    }
+  }
+
+  function updateLockIcons() {
+    document.querySelectorAll('[data-lock]').forEach(lock => {
+      lock.querySelector('.lock-closed').style.display = authenticated ? 'none' : 'block';
+      lock.querySelector('.lock-open').style.display = authenticated ? 'block' : 'none';
+    });
+  }
+
+  function checkPassword() {
+    const input = document.getElementById('password-input').value;
+    const error = document.getElementById('password-error');
+    if (input.toLowerCase() === PASSWORD) {
+      authenticated = true;
+      updateLockIcons();
+      document.getElementById('password-input').value = '';
+      error.style.display = 'none';
+      if (pendingCase) {
+        showCase(pendingCase);
+        pendingCase = null;
+      } else {
+        scrollToWork();
+      }
+    } else {
+      error.style.display = 'block';
+      document.getElementById('password-input').value = '';
+      document.getElementById('password-input').focus();
+    }
+  }
+
+  let lightboxGallery = [];
+  let lightboxIndex = 0;
+
+  function openLightbox(src, gallery) {
+    const lb = document.getElementById('lightbox');
+    document.getElementById('lightbox-img').src = src;
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    lightboxGallery = gallery || [];
+    lightboxIndex = lightboxGallery.indexOf(src);
+    const showNav = lightboxGallery.length > 1;
+    document.getElementById('lightbox-prev').style.display = showNav ? 'block' : 'none';
+    document.getElementById('lightbox-next').style.display = showNav ? 'block' : 'none';
+  }
+
+  function lightboxNav(dir) {
+    if (!lightboxGallery.length) return;
+    lightboxIndex = (lightboxIndex + dir + lightboxGallery.length) % lightboxGallery.length;
+    document.getElementById('lightbox-img').src = lightboxGallery[lightboxIndex];
+  }
+
+  function closeLightbox(e) {
+    if (e && (e.target === document.getElementById('lightbox-img') ||
+              e.target === document.getElementById('lightbox-prev') ||
+              e.target === document.getElementById('lightbox-next'))) return;
+    document.getElementById('lightbox').classList.remove('open');
+    document.getElementById('lightbox-img').src = '';
+    document.body.style.overflow = '';
+    lightboxGallery = [];
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+  });
+
+  document.addEventListener('click', e => {
+    const img = e.target.closest('.cs-image-full img, .cs-image-inline img, .cs-image-phones img, .cs-image-pair img, .cs-image-2x2 img');
+    if (!img) return;
+    const container = img.closest('.cs-image-phones, .cs-image-pair');
+    const gallery = container
+      ? Array.from(container.querySelectorAll('img')).map(i => i.src)
+      : [img.src];
+    openLightbox(img.src, gallery);
+  });
+</script>
+</body>
+</html>
